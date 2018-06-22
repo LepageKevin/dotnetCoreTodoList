@@ -6,8 +6,8 @@ using todoList.Data;
 
 namespace todoList.Services
 {
-    public interface ITaskService : IGenericService<TaskItem>
+    public interface ITaskItemService : IGenericService<TaskItem>
     {
-        IEnumerable GetTasksWithCategoryAndUser();
+        IEnumerable<TaskItem> GetTasksWithCategoryAndUser();
     }
 }

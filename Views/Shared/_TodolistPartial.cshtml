@@ -1,0 +1,12 @@
+@using Microsoft.AspNetCore.Identity
+@using todoList.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li><a asp-area="" asp-controller="TaskItem" asp-action="Create">Ajouter Tâche</a></li>
+    <li><a asp-area="" asp-controller="Category" asp-action="Create">Ajouter Catégorie</a></li>
+    <li><a asp-area="" asp-controller="Category" asp-action="CategoryList">Liste Catégories</a></li>
+}

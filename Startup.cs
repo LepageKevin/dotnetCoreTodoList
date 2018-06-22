@@ -36,7 +36,7 @@ namespace todoList
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
-            services.AddTransient<ITaskService, TaskService>();
+            services.AddTransient<ITaskItemService, TaskItemService>();
             
             services.AddTransient<ICategoryService, CategoryService>();
 
@@ -60,11 +60,13 @@ namespace todoList
 
             app.UseAuthentication();
 
+            app.UseStatusCodePages();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=TaskItem}/{action=TaskList}");
             });
         }
     }

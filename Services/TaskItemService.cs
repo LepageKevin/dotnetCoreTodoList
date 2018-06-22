@@ -7,14 +7,14 @@ using todoList.Data;
 
 namespace todoList.Services
 {
-    public class TaskService : GenericService<TaskItem>, ITaskService
+    public class TaskItemService : GenericService<TaskItem>, ITaskItemService
     {
 
-        public TaskService(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
+        public TaskItemService(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
 
-        public IEnumerable GetTasksWithCategoryAndUser()
+        public IEnumerable<TaskItem> GetTasksWithCategoryAndUser()
         {
             return this.FindAllIncluable().Include(t => t.Category).Include(t => t.User);
         }

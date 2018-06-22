@@ -33,7 +33,7 @@ namespace todoList.Controllers
 
         public IActionResult CategoryList()
         {
-            return View(ICategoryService.GetCategories());
+            return View(ICategoryService.FindAll());
         }
 
         [HttpGet]

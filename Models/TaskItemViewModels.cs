@@ -1,12 +1,15 @@
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using todoList.Data;
 using todoList.Models;
 
-namespace todoList.Data
+namespace todoList.Models
 {
-    public class TaskItem
+    public class TaskItemViewModels
     {
         public int ID { get; set; }
 
-        public StateType State { get; set; }
+        public todoList.Data.TaskItem.StateType State { get; set; }
 
         public string Name { get; set; }
 
@@ -15,15 +18,9 @@ namespace todoList.Data
         public Category Category { get; set; }
         
         public int CategoryId { get; set; }
-
+        
         public ApplicationUser User { get; set; }
-
-        public enum StateType
-        {
-            Idea,
-            Todo,
-            InProgress,
-            Finish
-        }
+        
+        public List<SelectListItem> ListCategories { get; set; }
     }
 }

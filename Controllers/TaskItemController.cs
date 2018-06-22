@@ -5,30 +5,41 @@ using Microsoft.AspNetCore.Identity;
 using todoList.Models;
 using System.Threading.Tasks;
 using System;
+using System.Diagnostics;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace todoList.Controllers
 {
-    [Route("[controller]/[action]")]
     public class TaskItemController : Controller
     {
 
-        private ITaskService ITaskService { get; set; }
+        private ITaskItemService ITaskItemService { get; set; }
+
+        private ICategoryService ICategoryService { get; set; }
 
         private UserManager<ApplicationUser> UserManager { get; set; }
-        //taskService dependances dans construct
-        //file controlleur pour le form
-        //et un controllur pour la vue
-        //dans le controlleur implementer lee itaskService
 
-        public TaskItemController(UserManager<ApplicationUser> userManager, ITaskService iTaskService)
+        public TaskItemController(UserManager<ApplicationUser> userManager, ICategoryService iCategoryService, ITaskItemService iTaskItemService)
         {
             this.UserManager = userManager;
-            this.ITaskService = iTaskService;
+            this.ITaskItemService = iTaskItemService;
+            this.ICategoryService = iCategoryService;
+        }
+
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
         public IActionResult Create()
         {
-            return View(new TaskItem());
+            TaskItemViewModels taskItemViewModels = new TaskItemViewModels();
+            taskItemViewModels.ListCategories = ICategoryService.FindAll().Select(t => new SelectListItem() {
+                Text = t.Name,
+                Value = t.ID.ToString()
+            }).ToList();
+            return View(taskItemViewModels);
         }
         
         [HttpPost]
@@ -36,28 +47,25 @@ namespace todoList.Controllers
         {
             ApplicationUser user = await UserManager.GetUserAsync(this.User);
             taskItem.User = user;
-            taskItem.Category = new Category(){
-                Name = "Lavri"
-            };
-            ITaskService.Create(taskItem);
+            ITaskItemService.Create(taskItem);
             return RedirectToAction(nameof(TaskList));
         }
 
         public IActionResult TaskList()
         {
-            return View(ITaskService.GetTasksWithCategoryAndUser());
+            return View(ITaskItemService.GetTasksWithCategoryAndUser());
         }
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View(ITaskService.FindById(id));
+            return View(ITaskItemService.FindById(id));
         }
-        
+
         [HttpPost]
         public IActionResult Delete(TaskItem taskItem)
         {
-            ITaskService.Delete(taskItem.ID);
+            ITaskItemService.Delete(taskItem.ID);
             return RedirectToAction(nameof(TaskList));
         }
     }

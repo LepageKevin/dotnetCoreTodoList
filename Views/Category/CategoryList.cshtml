@@ -11,12 +11,8 @@
             <tr>
                 <td>@item.Name</td>
                 <td>
-                    <button type="button" class="btn btn-default">
-                        <a asp-controller="Category" asp-action="AddCategory"><span class="glyphicon glyphicon-pencil"></span></a>
-                    </button>
-                    <button type="button" class="btn btn-danger alert-danger">
-                        <a asp-controller="Category" asp-action="Delete"><span class="glyphicon glyphicon-remove-sign"></span></a>
-                    </button>
+                    <a asp-controller="Category" asp-action="AddCategory"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-danger alert-danger" asp-controller="Category" asp-action="Delete" asp-route-id="@item.ID"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </td>
             </tr>
         }

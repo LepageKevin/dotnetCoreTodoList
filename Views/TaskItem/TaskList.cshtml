@@ -12,16 +12,14 @@
     <tbody>     
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="@(new [] { "", "info", "warning", "success" }[(int)item.State])">
                 <td>@item.Name</td>
                 <td>@item.Description</td>
                 <td>@item.State</td>
                 <td>@item.Category.Name</td>
                 <td>@item.User</td>
                 <td>
-                    <button type="button" class="btn btn-default">
-                        <a asp-controller="TaskItem" asp-action="AddTaskItemAsync"><span class="glyphicon glyphicon-pencil"></span></a>
-                    </button>
+                    <a asp-controller="TaskItem" asp-action="AddTaskItemAsync"><span class="glyphicon glyphicon-pencil"></span></a>
                     <a class="btn btn-danger alert-danger" asp-controller="TaskItem" asp-action="Delete" asp-route-id="@item.ID"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </td>
             </tr>
