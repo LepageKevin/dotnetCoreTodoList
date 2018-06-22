@@ -17,9 +17,14 @@ namespace todoList.Services
             ApplicationDbContext = applicationDbContext;
         }
 
-        public IEnumerable FindAll()
+        public IEnumerable<T> FindAll()
         {
-            return ApplicationDbContext.Set<T>().ToList();
+            return ApplicationDbContext.Set<T>();
+        }
+
+        protected IQueryable<T> FindAllIncluable()
+        {
+            return ApplicationDbContext.Set<T>();
         }
 
         public T FindById(int id)
@@ -39,9 +44,10 @@ namespace todoList.Services
             ApplicationDbContext.SaveChanges();
         }
 
-        public void Delete(T entity)
+        public void Delete(int id)
         {
-            ApplicationDbContext.Set<T>().Remove(entity);
+            T value = FindById(id);
+            ApplicationDbContext.Set<T>().Remove(value);
             ApplicationDbContext.SaveChanges();
         }
     }

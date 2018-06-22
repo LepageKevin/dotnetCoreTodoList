@@ -4,6 +4,7 @@
     <thead>
         <th>Nom</th>
         <th>Description</th>
+        <th>State</th>
         <th>Catégorie</th>
         <th>Email</th>
         <th>Actions</th>
@@ -14,15 +15,14 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.Description</td>
+                <td>@item.State</td>
                 <td>@item.Category.Name</td>
                 <td>@item.User</td>
                 <td>
                     <button type="button" class="btn btn-default">
                         <a asp-controller="TaskItem" asp-action="AddTaskItemAsync"><span class="glyphicon glyphicon-pencil"></span></a>
                     </button>
-                    <button type="button" class="btn btn-danger alert-danger">
-                        <a asp-controller="TaskItem" asp-action="Delete"><span class="glyphicon glyphicon-remove-sign"></span></a>
-                    </button>
+                    <a class="btn btn-danger alert-danger" asp-controller="TaskItem" asp-action="Delete" asp-route-id="@item.ID"><span class="glyphicon glyphicon-remove-sign"></span></a>
                 </td>
             </tr>
         }

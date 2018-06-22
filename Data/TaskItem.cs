@@ -6,7 +6,7 @@ namespace todoList.Data
     {
         public int ID { get; set; }
 
-        public int State { get; set; }
+        public StateType State { get; set; }
 
         public string Name { get; set; }
 
@@ -16,7 +16,7 @@ namespace todoList.Data
         
         public ApplicationUser User { get; set; }
 
-        private enum StateType
+        public enum StateType
         {
             Idea,
             Todo,

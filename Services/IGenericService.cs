@@ -7,11 +7,11 @@ namespace todoList.Services
 {
     public interface IGenericService<TEntity>
     {
-        IEnumerable FindAll();
+        IEnumerable<TEntity> FindAll();
         TEntity FindById(int id);
 
         void Create(TEntity entity);
         void Update(TEntity entity);
-        void Delete(TEntity entity);
+        void Delete(int id);
     }
 }

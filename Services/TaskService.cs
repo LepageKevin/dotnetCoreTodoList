@@ -14,9 +14,9 @@ namespace todoList.Services
         {
         }
 
-        public IEnumerable FindAll()
+        public IEnumerable GetTasksWithCategoryAndUser()
         {
-            return ApplicationDbContext.TaskItem.Include(t => t.Category).Include(t => t.User);
+            return this.FindAllIncluable().Include(t => t.Category).Include(t => t.User);
         }
     }
 }

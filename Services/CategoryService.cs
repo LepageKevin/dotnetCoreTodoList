@@ -13,5 +13,10 @@ namespace todoList.Services
         public CategoryService(ApplicationDbContext applicationDbContext) : base(applicationDbContext)
         {
         }
+
+        public IEnumerable GetCategories()
+        {
+            return this.FindAll();
+        }
     }
 }

@@ -6,7 +6,7 @@
 @model TaskItem
 <form asp-controller="TaskItem" asp-action="AddTaskItemAsync" method="POST">
     <div>Name: <input asp-for="Name" /></div>
-    <div>State: <input asp-for="State" /></div>
+    <div>State: <select asp-for="State" asp-items="Html.GetEnumSelectList<TaskItem.StateType>()"></select></div>
     <div>Description: <input asp-for="Description" /></div>
     <div>Category: <input asp-for="Category" /></div>
     <input type="submit" />

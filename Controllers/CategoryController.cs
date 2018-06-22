@@ -33,14 +33,20 @@ namespace todoList.Controllers
 
         public IActionResult CategoryList()
         {
-            return View(ICategoryService.FindAll());
+            return View(ICategoryService.GetCategories());
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(ICategoryService.FindById(id));
+        }
+        
         [HttpPost]
         public IActionResult Delete(Category category)
         {
-            ICategoryService.Delete(category);
-            return RedirectToAction(nameof(category));
+            ICategoryService.Delete(category.ID);
+            return RedirectToAction(nameof(CategoryList));
         }
     }
 }

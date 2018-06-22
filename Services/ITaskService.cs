@@ -8,5 +8,6 @@ namespace todoList.Services
 {
     public interface ITaskService : IGenericService<TaskItem>
     {
+        IEnumerable GetTasksWithCategoryAndUser();
     }
 }

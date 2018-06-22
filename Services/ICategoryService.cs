@@ -8,5 +8,6 @@ namespace todoList.Services
 {
     public interface ICategoryService : IGenericService<Category>
     {
+        IEnumerable GetCategories();
     }
 }

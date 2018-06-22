@@ -45,13 +45,19 @@ namespace todoList.Controllers
 
         public IActionResult TaskList()
         {
-            return View(ITaskService.FindAll());
+            return View(ITaskService.GetTasksWithCategoryAndUser());
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            return View(ITaskService.FindById(id));
+        }
+        
         [HttpPost]
         public IActionResult Delete(TaskItem taskItem)
         {
-            ITaskService.Delete(taskItem);
+            ITaskService.Delete(taskItem.ID);
             return RedirectToAction(nameof(TaskList));
         }
     }

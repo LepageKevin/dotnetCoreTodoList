@@ -37,6 +37,8 @@ namespace todoList
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddTransient<ITaskService, TaskService>();
+            
+            services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddMvc();
         }
