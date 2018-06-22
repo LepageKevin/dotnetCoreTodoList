@@ -1,0 +1,7 @@
+@model TaskItem
+<p>Voulez-vous vraiment supprimer  @Model.Name ?</p>
+
+<form asp-controller="TaskItem" asp-action="Delete" method="POST">
+    <input type="hidden" asp-for="ID" value=@Model.ID />
+    <input type="submit" class="btn btn-danger" value="Supprimer"/>
+</form>
